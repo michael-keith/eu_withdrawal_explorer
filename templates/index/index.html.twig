@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}EU{% endblock %}
+
+{% block body %}
+
+<div class="container-fluid">
+
+  <div id="title_bar" class="row">
+    <div class="col-md-12"><h1>Title</h1></div>
+  </div>
+
+  <div class="row">
+
+    <div class="col-sm-4">
+      Text
+    </div>
+
+    <div id="search" class="col-sm-4">
+      <input id="search_bar" class="form-control form-control-lg" type="text" onkeyup="search_word(this.value)">
+      <div id="search_results"></div>
+    </div>
+
+    <div id="page_viewer" class="col-sm-4">
+
+      {% set part = "INTRO" %}
+      {% set annex = "" %}
+      {% set article = "" %}
+      {% set annex_undiv = false %}
+      {% set part_undiv = false %}
+      {% set article_undiv = false %}
+      {% for page in pages %}
+
+      {% if page.annex != "" and page.annex != annex %}
+      {% set annex = page.annex %}
+      {% if annex_undiv == true %}</div>{% endif %}
+      {% if part_undiv == true %}</div>{% set part_undiv = false %}{% endif %}
+      <div class="annex"> <div><h3>{{annex}} - {{page.annex_title}}</h3></div>
+      {% set annex_undiv = true %}
+      {%endif%}
+
+      {% if page.part != "INTRO" and page.part != part %}
+      {% set part = page.part %}
+      {% if part_undiv == true %}</div>{% endif %}
+      <div class="part"> <div><h3>{{part}} - {{page.part_title}}</h3></div>
+      {% set part_undiv = true %}
+      {%endif%}
+
+      
+
+      <div id="page_{{page.page_num}}" class="page" onclick="search_page({{page.page_num}})">{{ page.page_num }}</div>
+
+      {% endfor %}
+    </div></div>
+
+  </div>
+
+</div>
+
+</div>
+
+{% endblock %}

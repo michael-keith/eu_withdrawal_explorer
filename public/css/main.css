@@ -1,0 +1,85 @@
+#page_viewer {
+  height: 90vh;
+  overflow: scroll;
+}
+
+.page {
+  width: 27px;
+  height: 40px;
+  border: solid 1px #111;
+  display: inline-block;
+  margin: 2px 1px 3px 2px;
+  padding: 2px;
+  font-size: 10px;
+  cursor: pointer;
+}
+
+.page.selected {
+  background-color: #888;
+  color: #FFF;
+}
+.page.page_selected{
+  border: 2px solid black;
+}
+
+.part, .annex {
+  border: 1px solid black;
+  margin: 0 0 5px 0;
+  padding: 2px 2px 2px 3px;
+}
+
+.part h3, .annex h3 {
+  font-size: 12px;
+  margin: 2px 0 2px 0;
+  padding: 0;
+}
+
+.annex {
+  border: 1px solid #888;
+  margin: 0 0 5px 0;
+}
+
+#search {
+  height: 90vh;
+  overflow: scroll;
+}
+
+#search_bar {
+}
+
+#search_results {
+  overflow: scroll;
+
+  margin: 0 0 50px 0;
+}
+
+.search_results_title {
+  font-weight: bold;
+  border-bottom: 1px solid #000;
+  margin: 15px 0 15px 0;
+  padding: 0 0 5px 0;
+}
+
+.search_result {
+  margin: 5px 10px 0 0;
+  padding: 5px 10px 15px 10px;
+  border-bottom: 1px solid #CCC;
+}
+
+.search_result p {
+  margin: 0;
+  padding: 0;
+}
+
+.search_result_info {
+  color: #999;
+}
+
+.page_text {
+  margin: 10px 0 0 0;
+}
+
+.highlight {
+  font-weight: bold;
+  color: #FF0000;
+}
