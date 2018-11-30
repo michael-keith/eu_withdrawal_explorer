@@ -4,14 +4,23 @@
 }
 
 .page {
-  width: 27px;
+  /* width: 27px;
   height: 40px;
   border: solid 1px #111;
   display: inline-block;
   margin: 2px 1px 3px 2px;
   padding: 2px;
   font-size: 10px;
-  cursor: pointer;
+  cursor: pointer; */
+  border: solid 1px black;
+  margin: 0 0 2px 0;
+  padding: 2px;
+}
+
+.page p {
+  font-size: 10px;
+  margin: 0;
+  padding: 0;
 }
 
 .page.selected {
@@ -23,9 +32,26 @@
 }
 
 .part, .annex {
-  border: 1px solid black;
+  border: 1px solid;
   margin: 0 0 5px 0;
   padding: 2px 2px 2px 3px;
+}
+
+.part {
+  background-color: #AAA;
+}
+.part:nth-child(even) {
+  background-color: #CCC;
+}
+
+.annex {
+  border-color: #FF0000;
+  margin: 20px 0 0 0;
+}
+
+.line {
+  height: 1px;
+  margin: 0px 0 0 0;
 }
 
 .part h3, .annex h3 {
@@ -34,9 +60,14 @@
   padding: 0;
 }
 
-.annex {
+.article {
   border: 1px solid #888;
   margin: 0 0 5px 0;
+  background-color: #00FF00;
+}
+
+.article:nth-child(even) {
+  background-color: #0000FF;
 }
 
 #search {
@@ -77,6 +108,12 @@
 
 .page_text {
   margin: 10px 0 0 0;
+}
+
+.page_num {
+  font-size: 9px;
+  margin: 0;
+  padding: 0;
 }
 
 .highlight {

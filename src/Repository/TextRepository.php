@@ -26,10 +26,6 @@ class TextRepository extends ServiceEntityRepository
     {
         return $this->createQueryBuilder('page')
         ->select(' page.page_num as page_num, page.annex, page.annex_title, page.part, page.part_title, page.article, page.article_title')
-        ->where('page.part_title != :ex AND page.text != :ex2')
-        ->setParameter('ex', "")
-        ->setParameter('ex2', "\n")
-        ->groupBy('page_num')
         ->getQuery()
         ->getResult();
         ;
