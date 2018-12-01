@@ -18,14 +18,6 @@ class IndexController extends AbstractController
     ->getRepository(Text::class)
     ->getAllPages();
 
-    // $page_words = $this->getDoctrine()
-    // ->getRepository(Text::class)
-    // ->searchWord("");
-
-    // foreach($page_words as $words) {
-    //   $pages[$words["page_num"]-1]["selected"] = true;
-    // }
-
     return $this->render('index/index.html.twig', [
       'controller_name' => 'IndexController',
       'pages' => $pages,

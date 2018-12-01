@@ -4,14 +4,20 @@
 }
 
 .page {
-  width: 27px;
-  height: 40px;
+  width: 48px;
+  min-height: 70px;
   border: solid 1px #111;
   display: inline-block;
   margin: 2px 1px 3px 2px;
   padding: 2px;
   font-size: 10px;
   cursor: pointer;
+}
+
+.page p {
+  font-size: 10px;
+  margin: 0;
+  padding: 0;
 }
 
 .page.selected {
@@ -23,9 +29,20 @@
 }
 
 .part, .annex {
-  border: 1px solid black;
+  border: 1px solid;
   margin: 0 0 5px 0;
   padding: 2px 2px 2px 3px;
+}
+
+.annex {
+  border-color: #FF0000;
+  margin: 20px 0 0 0;
+}
+
+.line {
+  height: 0.5px;
+  margin: 1px 0 0 0;
+  background-color: #000;
 }
 
 .part h3, .annex h3 {
@@ -34,9 +51,9 @@
   padding: 0;
 }
 
-.annex {
+.article {
   border: 1px solid #888;
-  margin: 0 0 5px 0;
+  margin: 5px 5px 5px 5px;
 }
 
 #search {
@@ -77,6 +94,12 @@
 
 .page_text {
   margin: 10px 0 0 0;
+}
+
+.page_num {
+  font-size: 9px;
+  margin: 0;
+  padding: 0;
 }
 
 .highlight {
