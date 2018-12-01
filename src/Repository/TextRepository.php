@@ -25,7 +25,9 @@ class TextRepository extends ServiceEntityRepository
     public function getAllPages()
     {
         return $this->createQueryBuilder('page')
-        ->select(' page.page_num as page_num, page.annex, page.annex_title, page.part, page.part_title, page.article, page.article_title')
+        ->select(' page.page_num as page_num, page.annex, page.annex_title, page.part, page.part_title, page.article, page.article_title, page.text')
+        ->where('page.text != :word')
+        ->setParameter('word', '\n')
         ->getQuery()
         ->getResult();
         ;

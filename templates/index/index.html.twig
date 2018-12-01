@@ -21,120 +21,66 @@
       <div id="search_results"></div>
     </div>
 
-    <div id="page_viewer" class="col-sm-4">
-
-      {% set article = "" %}
-      {% set article_undiv = false %}
+    <div id="page_num_viewer" class="col-sm-4">
 
       {% set part = "" %}
-      {% set part_undiv = false %}
-
       {% set annex = "" %}
-      {% set annex_undiv = false %}
-
+      {% set article = "" %}
       {% set page = "" %}
+
+      {% set annex_undiv = false %}
+      {% set part_undiv = false %}
+      {% set article_undiv = false %}
       {% set page_undiv = false %}
 
-      {% set part_rediv = false %}
-      {% set article_rediv = false %}
-      {% set annex_rediv = false %}
+          {% for line in pages %}
 
-      {% for line in pages %}
+          {% if line.annex != annex %} <!-- Annex -->
+            {% set annex = line.annex %}
+            {% set page = "" %}
+            {% if page_undiv == true %}</div>{% set page_undiv = false %}{% endif %}
+            {% if article_undiv == true %}</div>{% set article_undiv = false %}{% endif %}
+            {% if part_undiv == true %}</div>{% set part_undiv=false %}{% endif %}
+            {% if annex_undiv == true %}</div>{% endif %}
+            <div class="annex">
+              <p>{{line.annex}}</p>
+            {% set annex_undiv = true %}
+          {% endif %} <!-- End Annex -->
 
-      <!-- Page -->
-        {% if line.page_num != page %}
-          {% if part_undiv == true %}
-          </div>
-            {% set part_undiv = false %}
-            {% set part_rediv = true %}
-          {% endif %}
-          {% if article_undiv == true %}
-            </div>
-            {% set article_undiv = false %}
-            {% set article_rediv = true %}
-          {% endif %}
-          {% if annex_undiv == true %}
-            </div>
-            {% set annex_undiv = false %}
-            {% set annex_rediv = true %}
-          {% endif %}
-          {% if page_undiv == true %}
-            </div>
-            {% set page_undiv = false %}
-          {% endif %}
-          <div class="page">
+          {% if line.part != part %} <!-- Part -->
+            {% set part = line.part %}
+            {% set page = "" %}
+            {% if page_undiv == true %}</div>{% set page_undiv = false %}{% endif %}
+            {% if article_undiv == true %}</div>{% set article_undiv = false %}{% endif %}
+            {% if part_undiv == true %}</div>{% endif %}
+            <div class="part">
+              <p>{{line.part}}</p>
+            {% set part_undiv = true %}
+          {% endif %} <!-- End Part -->
 
-          {% if part_rediv == true %}<div class="part">{% set part_rediv = false %}{% set part_undiv = true %}{% endif %}
-          {% if article_rediv == true %}<div class="article">{% set article_rediv = false %}{% set article_undiv = true %}{% endif %}
-          {% if annex_rediv == true %}<div class="annex">{% set annex_rediv = false %}{% set annex_undiv = true %}{% endif %}
+          {% if line.article != article %} <!-- article -->
+            {% set article = line.article %}
+            {% set page = "" %}
+            {% if page_undiv == true %}</div>{% set page_undiv = false %}{% endif %}
+            {% if article_undiv == true %}</div>{% endif %}
+            <div class="article">
+              <p>{{line.article}} - {{pages[loop.index+1].article_title}}</p>
+            {% set article_undiv = true %}
+          {% endif %} <!-- End article -->
 
-          {% set page_undiv = true %}
-          {% set page = line.page_num %}
+          {% if line.page_num != page and line.text != "\n" %} <!-- page -->
+            {% set page = line.page_num %}
+            {% if page_undiv == true %}</div>{% endif %}
+            <div id="page_{{line.page_num}}" class="page"> {{line.page_num}}
+            {% set page_undiv = true %}
+          {% endif %} <!-- End page -->
 
-        {% endif %}
+          <div class="line"></div>
 
-      <!-- Annex -->
-        {% if line.annex != annex %}
-          {% if annex_undiv == true %}
-            </div>
-            {% set annex_undiv = false %}
-          {% endif %}
-          {% if part_undiv == true %}
-            </div>
-            {% set part_undiv = false %}
-          {% endif %}
-          {% if article_undiv == true %}
-            </div>
-            {% set article_undiv = false %}
-          {% endif %}
+          {% endfor %}
 
-          <div class="annex">
-          {% set annex_undiv = true %}
-          {% set part_undiv = false %}
-          {% set article_undiv = false %}
-          {% set annex = line.annex %}
-          <p>{{ annex }} - {{ pages[loop.index+1].annex_title }}</p>
-        {% endif %}
+    </div>
 
-      <!-- Part -->
-        {% if line.part != part %}
-          {% if part_undiv == true %}
-            </div>
-            {% set part_undiv = false %}
-          {% endif %}
-          {% if article_undiv == true %}
-            </div>
-            {% set article_undiv = false %}
-          {% endif %}
-
-          <div class="part">
-          {% set part_undiv = true %}
-          {% set article_undiv = false %}
-          {% set part = line.part %}
-          <p>{{ part }} - {{ pages[loop.index+1].part_title }}</p>
-        {% endif %}
-
-        <!-- Article --->
-        {% if line.article != article and line.article != "" %}
-          {% if article_undiv == true %}
-            </div>
-            {% set article_undiv = false %}
-          {% endif %}
-
-          <div class="article">
-          {% set article_undiv = true %}
-          {% set article = line.article %}
-          <p>A: {{ article }} - {{ pages[loop.index+1].article_title }}</p>
-        {% endif %}
-
-
-
-        <div class="line"></div>
-
-
-
-
-      {% endfor %}
 
   </div>
 
