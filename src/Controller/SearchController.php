@@ -21,7 +21,7 @@ class SearchController extends AbstractController
     if(strlen($word)>3) {
         $search_term = "%" . $word . "%";
     }
-    else {$search_term = "%" . $word . "%";}
+    else {$search_term = "% " . $word . " %";}
 
     $page_words = $this->getDoctrine()
     ->getRepository(Text::class)

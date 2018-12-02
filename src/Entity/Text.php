@@ -61,6 +61,16 @@ class Text
      */
     private $article_title;
 
+    /**
+     * @ORM\Column(type="string", length=510, nullable=true)
+     */
+    private $title;
+
+    /**
+     * @ORM\Column(type="string", length=510, nullable=true)
+     */
+    private $title_title;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -170,6 +180,30 @@ class Text
     public function setArticleTitle(?string $article_title): self
     {
         $this->article_title = $article_title;
+
+        return $this;
+    }
+
+    public function getTitle(): ?string
+    {
+        return $this->title;
+    }
+
+    public function setTitle(string $title): self
+    {
+        $this->title = $title;
+
+        return $this;
+    }
+
+    public function getTitleTitle(): ?string
+    {
+        return $this->title_title;
+    }
+
+    public function setTitleTitle(?string $title_title): self
+    {
+        $this->title_title = $title_title;
 
         return $this;
     }

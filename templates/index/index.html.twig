@@ -21,14 +21,16 @@
       <div id="search_results"></div>
     </div>
 
-    <div id="page_num_viewer" class="col-sm-4">
+    <div id="page_viewer" class="col-sm-4">
 
       {% set part = "" %}
+      {% set title = "" %}
       {% set annex = "" %}
       {% set article = "" %}
       {% set page = "" %}
 
       {% set annex_undiv = false %}
+      {% set title_undiv = false %}
       {% set part_undiv = false %}
       {% set article_undiv = false %}
       {% set page_undiv = false %}
@@ -54,9 +56,20 @@
             {% if article_undiv == true %}</div>{% set article_undiv = false %}{% endif %}
             {% if part_undiv == true %}</div>{% endif %}
             <div class="part">
-              <p>{{line.part}}</p>
+              <p>{{line.part}} - {{pages[loop.index+1].part_title}}</p>
             {% set part_undiv = true %}
           {% endif %} <!-- End Part -->
+
+          {% if line.title != title %} <!-- Title -->
+            {% set title = line.title %}
+            {% set page = "" %}
+            {% if page_undiv == true %}</div>{% set page_undiv = false %}{% endif %}
+            {% if article_undiv == true %}</div>{% set article_undiv = false %}{% endif %}
+            {% if title_undiv == true %}</div>{% endif %}
+            <div class="title">
+              <p>{{line.title}} - {{ pages[loop.index+1].title_title }}</p>
+            {% set title_undiv = true %}
+          {% endif %} <!-- End title -->
 
           {% if line.article != article %} <!-- article -->
             {% set article = line.article %}
@@ -71,15 +84,15 @@
           {% if line.page_num != page and line.text != "\n" %} <!-- page -->
             {% set page = line.page_num %}
             {% if page_undiv == true %}</div>{% endif %}
-            <div id="page_{{line.page_num}}" class="page"> {{line.page_num}}
+            <div class="page page_{{line.page_num}}" onclick='search_page({{line.page_num}})'> {{line.page_num}}
             {% set page_undiv = true %}
           {% endif %} <!-- End page -->
 
-          <div class="line"></div>
+          <div class="line {% if line.text == "\n" %}line_blank{% endif %}"></div>
 
           {% endfor %}
 
-    </div>
+    </div></div></div></div>
 
 
   </div>

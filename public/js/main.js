@@ -4,7 +4,7 @@ search_word( $('#search_bar').val() );
 
 function search_word(word) {
 
-  if(word.length > 2) {
+  if(word.length >= 2) {
     var request = $.ajax({
       url: "search/word",
       type: "GET",
@@ -51,13 +51,18 @@ function search_page(page, word) {
 function display_page(lines, word) {
   $( "#search_results" ).html("");
   $( "#search_results" ).append( "<div class='page_text'><p>"+lines[0].text+"</p></div>" );
-  $('#search_results').highlight(word);
+  if(word){ $('#search_results').highlight(word); }
 
   //Set the page selected class on the page currently beng viewed
   $( ".page_selected" ).each(function( index ) {
     $( this ).removeClass( "page_selected" );
   });
-  $( "#page_" + lines[0].page_num ).addClass( "page_selected" );
+  $( ".page_" + lines[0].page_num ).addClass( "page_selected" );
+
+  //Jump viewer to page
+  $("#page_viewer").animate({
+    scrollTop: $('#page_viewer').scrollTop() + $(".page_" + lines[0].page_num).parent().offset().top - $("#title_bar").height()
+  }, 150);
 }
 
 function display_search(pages, word) {
@@ -79,11 +84,11 @@ function update_pages(pages) {
   if(pages[0]) {
 
     $("#page_viewer").animate({
-      scrollTop: $('#page_viewer').scrollTop() + $("#page_" + pages[0].page_num).parent().offset().top - $("#title_bar").height()
+      scrollTop: $('#page_viewer').scrollTop() + $(".page_" + pages[0].page_num).parent().offset().top - $("#title_bar").height()
     }, 150);
 
     pages.forEach(function(page){
-      $( "#page_" + page.page_num ).addClass( "selected" );
+      $( ".page_" + page.page_num ).addClass( "selected" );
     });
 
   }
